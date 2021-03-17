@@ -1,11 +1,11 @@
 # data parameters
-dataset_name: cifar10
+dataset_name: MVTec
 n_channel: 3
-image_size: 32  # {mnist, fashionmnist}:28, cifar10: 32, {coil100, MVTec, Medical}:128
-normal_class: 1
+image_size: 128  # {mnist, fashionmnist}:28, cifar10: 32, {coil100, MVTec, Medical}:128
+normal_class: hazelnut
 last_epoch: 2000
 
-batch_size: 32   # 8 for MVTec and medical datasets
+batch_size: 8   # 8 for MVTec and medical datasets
 
 # Unet
 base_channel: 64

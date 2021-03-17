@@ -23,7 +23,7 @@ def find_fpr(fpr, tpr, tpr_target):
     return fpr[min_idx], tpr[min_idx]
 
 
-def test(model, normal_class, perm_list, perm_cost, test_dataloader):
+def test(model, target_class, perm_list, perm_cost, test_dataloader):
     label_score_max = []
     label_score_min = []
     label_score_avg = []
@@ -78,8 +78,8 @@ def test(model, normal_class, perm_list, perm_cost, test_dataloader):
     for key, label_score in label_scores.items():
         labels, scores = zip(*label_score)
         labels = np.array(labels)
-        indx1 = labels == normal_class
-        indx2 = labels != normal_class
+        indx1 = labels == target_class
+        indx2 = labels != target_class
         labels[indx1] = 1
         labels[indx2] = 0
         scores = np.array(scores)
@@ -131,7 +131,18 @@ def main():
 
     n_channel = config['n_channel']
     normal_class = config["normal_class"]
-    checkpoint_path = "outputs/{}/{}/checkpoints/".format(config['dataset_name'], normal_class)
+    dataset_name = config['dataset_name']
+    checkpoint_path = "outputs/{}/{}/checkpoints/".format(dataset_name, normal_class)
+
+    if dataset_name != "MVTec":
+        target_class = normal_class
+    else:
+        mvtec_good_dict = {'bottle': 3, 'cable': 5, 'capsule': 2, 'carpet': 2,
+                           'grid': 3, 'hazelnut': 2, 'leather': 4, 'metal_nut': 3, 'pill': 5,
+                           'screw': 0, 'tile': 2, 'toothbrush': 1, 'transistor': 3, 'wood': 2,
+                           'zipper': 4
+                           }
+        target_class = mvtec_good_dict[normal_class]
 
     _, val_dataloader, test_dataloader = load_data(config)
 
@@ -141,7 +152,7 @@ def main():
     permutation_list = get_all_permutations()
 
     perm_cost = get_avg_val_error_per_permutation(model, permutation_list, val_dataloader)
-    auc_dict = test(model, normal_class, permutation_list, perm_cost, test_dataloader)
+    auc_dict = test(model, target_class, permutation_list, perm_cost, test_dataloader)
     print(auc_dict)
 
 

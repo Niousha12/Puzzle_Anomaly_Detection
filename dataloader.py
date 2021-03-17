@@ -122,7 +122,7 @@ def load_data(config):
         train_dataset_array = next(iter(train_loader))[0]
         train_set = TensorDataset(train_dataset_array)
 
-        test_data_path = '/content/' + normal_class + '/test'
+        test_data_path = 'Dataset/MVTec/' + normal_class + '/test'
         test_set = ImageFolder(root=test_data_path, transform=orig_transform)
 
     train_dataloader = torch.utils.data.DataLoader(
