@@ -118,7 +118,7 @@ def load_data(config):
 
         dataset = ConcatDataset(data_list)
 
-        train_loader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
+        train_loader = torch.utils.data.DataLoader(dataset, batch_size=800, shuffle=True)
         train_dataset_array = next(iter(train_loader))[0]
         train_set = TensorDataset(train_dataset_array)
 

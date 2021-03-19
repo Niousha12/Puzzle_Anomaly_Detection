@@ -27,10 +27,12 @@ def main():
     epsilon = float(config['eps'])
     alpha = float(config['alpha'])
 
-    if dataset_name == 'MVTec':
-        get_random_permutation = get_forced_random_permutation
-    else:
-        get_random_permutation = get_unforced_random_permutation
+    get_random_permutation = get_unforced_random_permutation
+
+    # if dataset_name == 'MVTec':
+    #     get_random_permutation = get_forced_random_permutation
+    # else:
+    #     get_random_permutation = get_unforced_random_permutation
 
     train_dataloader, _, _ = load_data(config)
 
