@@ -6,7 +6,7 @@ normal_class: hazelnut
 
 
 # training parameters
-num_epochs: 2000
+num_epochs: 3021 # cifar10:2000, MVTec:3021
 batch_size: 8   # 8 for MVTec and medical datasets
 
 # Unet

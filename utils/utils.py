@@ -96,10 +96,20 @@ def rebuild_tensor(tensor_list, base_tensor, tile_size=14, offset=14):
     return base_tensor
 
 
-def get_random_permutation():
+def get_unforced_random_permutation():
     while True:
         perm = torch.randperm(4)
         if perm.tolist() != [0, 1, 2, 3]:
+            return perm
+
+
+def get_forced_random_permutation():
+    while True:
+        perm = torch.randperm(4)
+        count = 0
+        for i in range(len(perm)):
+            if perm[i] != i: count += 1
+        if count == 2:
             return perm
 
 

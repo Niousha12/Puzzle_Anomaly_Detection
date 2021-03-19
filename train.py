@@ -15,9 +15,10 @@ def main():
 
     n_channel = config['n_channel']
     normal_class = config["normal_class"]
+    dataset_name = config['dataset_name']
 
-    checkpoint_path = "outputs/{}/{}/checkpoints/".format(config['dataset_name'], normal_class)
-    train_output_path = "outputs/{}/{}/train_outputs/".format(config['dataset_name'], normal_class)
+    checkpoint_path = "outputs/{}/{}/checkpoints/".format(dataset_name, normal_class)
+    train_output_path = "outputs/{}/{}/train_outputs/".format(dataset_name, normal_class)
 
     # create directory
     Path(checkpoint_path).mkdir(parents=True, exist_ok=True)
@@ -25,6 +26,11 @@ def main():
 
     epsilon = float(config['eps'])
     alpha = float(config['alpha'])
+
+    if dataset_name == 'MVTec':
+        get_random_permutation = get_forced_random_permutation
+    else:
+        get_random_permutation = get_unforced_random_permutation
 
     train_dataloader, _, _ = load_data(config)
 
@@ -47,15 +53,12 @@ def main():
     l_adv = l2_loss
     l_bce = nn.BCELoss()
 
-    permutation_list = get_all_permutations()
-
     num_epochs = config['num_epochs']
     epoch_loss_dict = dict()
     unet.train()
     discriminator.train()
 
     for epoch in range(num_epochs + 1):
-
         epoch_ae_loss = 0
         epoch_total_loss = 0
 
