@@ -151,15 +151,6 @@ def main():
 
     permutation_list = get_all_permutations()
 
-    # if dataset_name != "MVTec":
-    #     permutation_list = get_all_permutations()
-    # else:
-    #     permutation_list = []
-    #     while len(permutation_list) < 6:
-    #         perm = get_forced_random_permutation().tolist()
-    #         if perm not in permutation_list:
-    #             permutation_list.append(perm)
-
     perm_cost = get_avg_val_error_per_permutation(model, permutation_list, val_dataloader)
     auc_dict = test(model, target_class, permutation_list, perm_cost, test_dataloader)
     print(auc_dict)

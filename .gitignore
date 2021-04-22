@@ -11,8 +11,7 @@ __pycache__/
 .Python
 .idea/
 venv/
-train/
-test/
+stability_test.py
 temp_data/
 build/
 develop-eggs/

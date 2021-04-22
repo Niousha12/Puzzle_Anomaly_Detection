@@ -13,6 +13,15 @@ def get_config(config):
         return yaml.load(stream)
 
 
+def get_mvtec_class_type(class_name):
+    mvtec_class_type = {'bottle': 'object', 'cable': 'object', 'capsule': 'object', 'carpet': 'texture',
+                        'grid': 'texture', 'hazelnut': 'object', 'leather': 'texture', 'metal_nut': 'object',
+                        'pill': 'object', 'screw': 'object', 'tile': 'texture', 'toothbrush': 'object',
+                        'transistor': 'object', 'wood': 'texture', 'zipper': 'object'
+                        }
+    return mvtec_class_type[class_name]
+
+
 def fgsm_attack(inputs, model, eps=0.1, alpha=2):
     distribution = uniform.Uniform(torch.Tensor([-eps]), torch.Tensor([eps]))
     delta = distribution.sample(inputs.shape)

@@ -17,15 +17,15 @@ def load_data(config):
             transforms.ToTensor(),
         ])
 
-        os.makedirs("./train/CIFAR10", exist_ok=True)
-        dataset = CIFAR10('./train/CIFAR10', train=True, download=True, transform=img_transform)
+        os.makedirs("./Dataset/CIFAR10/train", exist_ok=True)
+        dataset = CIFAR10('./Dataset/CIFAR10/train', train=True, download=True, transform=img_transform)
         dataset.data = dataset.data[np.array(dataset.targets) == normal_class]
         dataset.targets = [normal_class] * dataset.data.shape[0]
 
         train_set, val_set = torch.utils.data.random_split(dataset, [dataset.data.shape[0] - 851, 851])
 
-        os.makedirs("./test/CIFAR10", exist_ok=True)
-        test_set = CIFAR10("./test/CIFAR10", train=False, download=True, transform=img_transform)
+        os.makedirs("./Dataset/CIFAR10/test", exist_ok=True)
+        test_set = CIFAR10("./Dataset/CIFAR10/test", train=False, download=True, transform=img_transform)
 
     elif config['dataset_name'] in ['mnist']:
         img_transform = transforms.Compose([
@@ -33,15 +33,15 @@ def load_data(config):
             transforms.ToTensor(),
         ])
 
-        os.makedirs("./train/MNIST", exist_ok=True)
-        dataset = MNIST('./train/MNIST', train=True, download=True, transform=img_transform)
+        os.makedirs("./Dataset/MNIST/train", exist_ok=True)
+        dataset = MNIST('./Dataset/MNIST/train', train=True, download=True, transform=img_transform)
         dataset.data = dataset.data[np.array(dataset.targets) == normal_class]
         dataset.targets = [normal_class] * dataset.data.shape[0]
 
         train_set, val_set = torch.utils.data.random_split(dataset, [dataset.data.shape[0] - 851, 851])
 
-        os.makedirs("./test/MNIST", exist_ok=True)
-        test_set = MNIST("./test/MNIST", train=False, download=True, transform=img_transform)
+        os.makedirs("./Dataset/MNIST/test", exist_ok=True)
+        test_set = MNIST("./Dataset/MNIST/test", train=False, download=True, transform=img_transform)
 
     elif config['dataset_name'] in ['fashionmnist']:
         img_transform = transforms.Compose([
@@ -49,15 +49,15 @@ def load_data(config):
             transforms.ToTensor(),
         ])
 
-        os.makedirs("./train/FashionMNIST", exist_ok=True)
-        dataset = FashionMNIST('./train/FashionMNIST', train=True, download=True, transform=img_transform)
+        os.makedirs("./Dataset/FashionMNIST/train", exist_ok=True)
+        dataset = FashionMNIST('./Dataset/FashionMNIST/train', train=True, download=True, transform=img_transform)
         dataset.data = dataset.data[np.array(dataset.targets) == normal_class]
         dataset.targets = [normal_class] * dataset.data.shape[0]
 
         train_set, val_set = torch.utils.data.random_split(dataset, [dataset.data.shape[0] - 851, 851])
 
-        os.makedirs("./test/FashionMNIST", exist_ok=True)
-        test_set = FashionMNIST("./test/FashionMNIST", train=False, download=True, transform=img_transform)
+        os.makedirs("./Dataset/FashionMNIST/test", exist_ok=True)
+        test_set = FashionMNIST("./Dataset/FashionMNIST/test", train=False, download=True, transform=img_transform)
 
     elif config['dataset_name'] in ['brain_tumor', 'head_ct']:
         img_transform = transforms.Compose([

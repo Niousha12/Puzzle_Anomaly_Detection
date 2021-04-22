@@ -1,13 +1,13 @@
 # data parameters
 dataset_name: MVTec
 n_channel: 3
-image_size: 128  # {mnist, fashionmnist}:28, cifar10: 32, {coil100, MVTec, Medical}:128
+image_size: 128  # {mnist, fashionmnist}:28, cifar10:32, {coil100, MVTec, Medical}:128
 normal_class: hazelnut
 
 
 # training parameters
-num_epochs: 3021 # cifar10:2000, MVTec:3021
-batch_size: 8   # 8 for MVTec and medical datasets
+num_epochs: 3000 # cifar10:2000, MVTec:3000, {mnist, fashionmnist}:600
+batch_size: 8   # {MVTec, Medical}:8, others:64
 
 # Unet
 base_channel: 64
@@ -21,12 +21,12 @@ beta1: 0.5
 beta2: 0.999
 
 # Learning_rate Scheduler
-factor: 0.8   # mnist: 0.5, {fashionmnist, cifar10, coil100, MVTec, Medical}: 0.8
-patience: 50  # mnist: 30, {fashionmnist, cifar10, coil100, MVTec, Medical}: 50
+factor: 0.8   # mnist:0.5, {fashionmnist, cifar10, coil100, MVTec, Medical}:0.8
+patience: 50  # mnist:30, {fashionmnist, cifar10, coil100, MVTec, Medical}:50
 
 
 # FGSM Attack
-eps: 0.01    # MNIST:0.1, {Fashion-MNIST, Medical}:0.07, {CIFAR10, COIL100}:10/255=0.0392, MVTec:0.01
+eps: 0.01    # mnist:0.1, {fashionmnist, Medical}:0.07, {cifar10, coil100}:10/255=0.0392, MVTec:0.01
 alpha: 2
 
 # Adversarial Loss
